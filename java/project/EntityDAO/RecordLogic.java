@@ -303,20 +303,20 @@ public class RecordLogic {
 	//------------------------------------- VARIABLES ENDS -------------------------------------------------
 
 
-	public String addRecords(FileInputStream f_in)
+	public String addRecords()
 	{
 
 		try {
 
-//			FileInputStream f_in = null;				// logic to fetch list of all patients from Excel File
-//			try {
-//
-//				f_in = new FileInputStream("D:\\abc.xlsx");
-//
-//			} catch (FileNotFoundException e) {
-//
-//				return "File Not Found";
-//			}
+			FileInputStream f_in = null;				// logic to fetch list of all patients from Excel File
+			try {
+
+				f_in = new FileInputStream("D:\\abc.xlsx");
+
+			} catch (FileNotFoundException e) {
+
+				return "File Not Found";
+			}
 
 			XSSFWorkbook workbook = null;
 

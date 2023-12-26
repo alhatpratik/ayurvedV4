@@ -32,13 +32,13 @@ public class AddPatientController {
 	@Autowired
 	RecordLogic rl;
 	
-//	@PostMapping("/add/record")
-//	@CrossOrigin("*")
-//	public String addRecords()
-//	{
-//		System.out.println("upto this");
-//		return rl.addRecords(); 
-//	}
+	@PostMapping("/add/record")
+	@CrossOrigin("*")
+	public String addRecords()
+	{
+		System.out.println("upto this");
+		return rl.addRecords(); 
+	}
 	
 	
 	
