@@ -234,7 +234,7 @@ public class Constant {
 	String NISHOTTAR_CHURNA_0_1g_x_5D = "NISHOTTAR CHURNA 0-----1g x 5D";
 	String NISHOTTAR_CHURNA_0_3g_x_5D = "NISHOTTAR CHURNA 0-----3g x 5D";
 	String SARPAGANDA_CHURNA_1g_1g_x_5D = "SARPAGANDA CHURNA 1g-----1g x 5D";
-	String JANU_BASTI_Mahanarayan_Tel = "JANU BASTI(Mahanarayan Tel)";
+	String JANU_BASTI_Mahanarayan_Tel = "JANU BASTI (Mahanarayan Tel)";
 	String NEBULIZATION_Budacort_TDS_x_2_D = "NEBULIZATION(Budacort TDS) x 2 D";
 	String TRAYODASHANGA_GUGGUL_2_2_x_5D = "TRAYODASHANGA GUGGUL 2----2 x 5D";
 	String ASHWAGANDA_CHURNA_1g_1g_x_5D = "ASHWAGANDA CHURNA 1g-----1g x 5D";
