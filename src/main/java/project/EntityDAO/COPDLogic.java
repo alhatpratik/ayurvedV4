@@ -45,4 +45,29 @@ public class COPDLogic {
 		return pt;
 	}
 	
+	public String updateRecord(Patient p)
+	{
+		
+		double record_no = p.getRecord_no();
+		double new_no= p.getNew_no();
+		double old_no = p.getOld_no();
+		String name =p.getName();
+		String address = p.getAddress();
+		int age = p.getAge();
+		char sex = p.getSex();
+		String department = p.getDepartment();
+		String diagnosis = p.getDiagnosis();
+		double weight = p.getWeight();
+		LocalDate date = p.getDate();
+		
+		
+		try {
+			opdi.updateRecord(weight, new_no,old_no,name, address, age, sex, department, diagnosis, date, record_no);
+			return "Record Successfully updated";
+		}catch(Exception e) {
+			return "Error Occured";
+		}
+		
+	}
+	
 }

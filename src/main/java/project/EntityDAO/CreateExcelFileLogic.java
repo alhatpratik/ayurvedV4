@@ -133,7 +133,7 @@ public class CreateExcelFileLogic {
 				try {
 					
 					int min = 1;
-					int max = 90;
+					int max = 95;
 					p.setYearly_no((int)random.nextInt((max - min) + 1) + min);
 				}
 				catch(Exception e) {
@@ -178,17 +178,19 @@ public class CreateExcelFileLogic {
 					Row dataRow = sheet.createRow(i);
 					dataRow.createCell(0).setCellValue(list_of_patients.get(i).getName());
 					dataRow.createCell(1).setCellValue(list_of_patients.get(i).getAddress());
-					if(departmentName.equalsIgnoreCase("balrog"))
-					{
-
-					}
-					else
-					{
+//					if(departmentName.equalsIgnoreCase("balrog"))
+//					{
+//
+//					}
+//					else
+//					{
+					System.out.println("age for "+list_of_patients.get(i).getName()+" is "+list_of_patients.get(i).getAge());
 						dataRow.createCell(2).setCellValue(list_of_patients.get(i).getAge());
-					}
+//					}
 
 					dataRow.createCell(3).setCellValue((char)list_of_patients.get(i).getSex());
 					
+					System.out.println("yearly no ::: "+list_of_patients.get(i).getYearly_no());
 					if(list_of_patients.get(i).getYearly_no()>=1 && list_of_patients.get(i).getYearly_no()<=50) {
 						
 						System.out.println("inside kaya checking for strirog ");
@@ -198,6 +200,7 @@ public class CreateExcelFileLogic {
 						System.out.println("is Female ? ::: "+flag+"  :::  "+list_of_patients.get(i).getSex());
 						
 						if(list_of_patients.get(i).getAge()<=14) {
+							
 							departmentName = "Balrog";
 						}else if((char)list_of_patients.get(i).getSex()=='F' && ((int)(list_of_patients.get(i).getYearly_no()%2) == 0) ) {
 							departmentName = "strirog";
@@ -232,14 +235,20 @@ public class CreateExcelFileLogic {
 						}
 						
 					}
-					else {
-						
+					else if(list_of_patients.get(i).getYearly_no()>80 && list_of_patients.get(i).getYearly_no()<=90) {
 						if(list_of_patients.get(i).getAge()<=14) {
 							departmentName = "Balrog";
 						}else {
 							departmentName = "Shalakya";
 						}
+					}
+					else {
 						
+						if(list_of_patients.get(i).getAge()<=14) {
+							departmentName = "Balrog";
+						}else {
+							departmentName = "Atyayika";
+						}
 					}
 					dataRow.createCell(4).setCellValue(""+departmentName);
 					
@@ -1087,20 +1096,22 @@ public class CreateExcelFileLogic {
 				try {
 					p.setName(arr[0].toLowerCase().trim());
 				} catch (Exception e) {
-					return "Patient Name not found or Invalid";
+
+				System.out.println("Patient Name not found or Invalid");
 				}
 				
 				try {
 					p.setAddress(arr[1].toLowerCase().trim());
 				} catch (Exception e) {
-					return "Patient Address not found or Invalid";
+					System.out.println("Patient Address not found or Invalid");
 				}
 				
 				try {
-					System.out.println("11");
+					System.out.println("11 age");
+					System.out.println("11 and age is :: "+((int)Double.parseDouble(arr[2])));
 					p.setAge((int)Double.parseDouble(arr[2]));
 				} catch (Exception e) {
-					return "Patient Age not found or Invalid";
+					System.out.println("Patient Age not found or Invalid");
 				}
 				
 
@@ -1111,7 +1122,7 @@ public class CreateExcelFileLogic {
 					p.setSex(s);
 					System.out.println("conversion in char successful");
 				} catch (Exception e) {
-					return "Patient Gender not found or Invalid";
+					System.out.println("Patient Gender not found or Invalid");
 				}
 				
 				try {
@@ -1123,13 +1134,13 @@ public class CreateExcelFileLogic {
 				try {
 					p.setDiagnosis(arr[5].toLowerCase().trim());
 				} catch (Exception e) {
-					return "Patient diagnosis not found or Invalid";
+					System.out.println("Patient diagnosis not found or Invalid");
 				}
 				
 				try {
 					p.setWeight((int)Double.parseDouble(arr[6]));
 				} catch (Exception e) {
-					return "Patient weight not found or Invalid";
+					System.out.println("Patient weight not found or Invalid");
 				}
 				
 				try {
@@ -1140,7 +1151,7 @@ public class CreateExcelFileLogic {
 					p.setDate(admitDate);
 					
 				} catch (Exception e) {
-					return "Patient Admit Date not found or Invalid";
+					System.out.println("Patient Admit Date not found or Invalid");
 				}
 				
 				
@@ -1216,7 +1227,7 @@ public class CreateExcelFileLogic {
 				FileOutputStream file_output_stream = new FileOutputStream(excelFileLocation);
 				work_book.write(file_output_stream);
 				file_output_stream.close();
-				System.out.println("Excel sheet Updated Successfully");
+				System.out.println("Excel sheet Updated Successfully PatientDataWrite.xlsx");
 
 			} catch (EncryptedDocumentException | IOException e) {
 
@@ -1552,7 +1563,7 @@ public class CreateExcelFileLogic {
 				FileOutputStream file_output_stream = new FileOutputStream(excelFileLocation);
 				work_book.write(file_output_stream);
 				file_output_stream.close();
-				System.out.println("Excel sheet Updated Successfully");
+				System.out.println("Excel sheet Updated Successfully patientFinalData.xlsx");
 
 			} catch (EncryptedDocumentException | IOException e) {
 

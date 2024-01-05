@@ -60,4 +60,11 @@ public class COPDController {
 		return p;
 	}
 	
+	@PostMapping("/copd/update/record")
+	@CrossOrigin("*")
+	public String updateRecord(@RequestBody Patient p)
+	{
+		String pt = copd_logic.updateRecord(p);
+		return pt;
+	}
 }
