@@ -37,7 +37,7 @@ public class CentralAdmitController {
 		return list;
 	}
 	
-	@GetMapping("/central/admit/admit_last_record")
+	@PostMapping("/central/admit/admit_last_record")
 	public Central_Admit getlastAdmittedRecord() 
 	{
 		
