@@ -24,7 +24,10 @@ public class CentralAdmitLogic {
 	}
 	
 	
-	
+	public Central_Admit getLastAdmittedAdmitRecord() 
+	{
+		return central_ipd_repo.getLastAdmittedRecord();
+	}
 	
 	
 	

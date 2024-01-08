@@ -15,4 +15,7 @@ public interface Central_AdmitRepo extends JpaRepository<Central_Admit, Double> 
 	@Query("select p from Central_Admit p where p.date=:d")
 	public List<Central_Admit> getCentral_IPD_Patients(LocalDate d);
 	
+	@Query("select p from Central_Admit p where yearly_no = (select max(yearly_no) from Central_Admit)")
+	public Central_Admit getLastAdmittedRecord();
+	
 }

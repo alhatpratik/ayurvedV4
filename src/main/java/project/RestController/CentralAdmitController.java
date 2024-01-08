@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,4 +37,14 @@ public class CentralAdmitController {
 		return list;
 	}
 	
+	@GetMapping("/central/admit/admit_last_record")
+	public Central_Admit getlastAdmittedRecord() 
+	{
+		
+		System.out.println("Inside Central IPD for last record");
+		
+		Central_Admit c_admit_last_record = cipdLogic.getLastAdmittedAdmitRecord();
+		
+		return c_admit_last_record;
+	}
 }
