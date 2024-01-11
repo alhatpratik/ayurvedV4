@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import project.Entity.OPDShalyatantra;
+import project.Entity.Patient;
 
 @Repository
 public interface OPDShalyatantraRepo extends JpaRepository<project.Entity.OPDShalyatantra, Double>{
@@ -15,4 +16,6 @@ public interface OPDShalyatantraRepo extends JpaRepository<project.Entity.OPDSha
 	@Query("select p from OPDShalyatantra p where p.dopd_shalya_patient.date=:d")
 	public List<OPDShalyatantra> get_shalya_DOPD_Patients(LocalDate d);
 	
+	@Query("select p from OPDShalyatantra p where dopd_shalya_yearly_no = (select max(dopd_shalya_yearly_no) from OPDShalyatantra)")
+	public Patient getLastRecord();
 }

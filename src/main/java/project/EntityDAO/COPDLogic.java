@@ -10,9 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import project.Entity.Central_Admit;
+import project.Entity.OPDPanchakarma;
 import project.Entity.Patient;
 import project.model.Summary;
 import project.repositories.Central_OPDRepo;
+import project.repositories.OPDAtyayikaRepo;
+import project.repositories.OPDBalrogaRepo;
+import project.repositories.OPDKayachikitsaRepo;
+import project.repositories.OPDPanchakarmaRepo;
+import project.repositories.OPDShalakyatantraRepo;
+import project.repositories.OPDShalyatantraRepo;
+import project.repositories.OPDStrirogaRepo;
+import project.repositories.OPDSwastharakshanamRepo;
 
 @Component
 public class COPDLogic {
@@ -23,12 +32,31 @@ public class COPDLogic {
 	@Autowired
 	Constant constant;
 	
-	
 	@Autowired
 	RecordLogic recordLogic;
 	
 	@Autowired
 	CentralAdmitLogic central_admit_logic;
+	
+	@Autowired
+	Central_OPDRepo centralOpdRepo;
+	
+	@Autowired
+	OPDKayachikitsaRepo opdKayaRepo;
+	@Autowired
+	OPDPanchakarmaRepo opdPanchRepo;
+	@Autowired
+	OPDShalakyatantraRepo opdShalakyaRepo;
+	@Autowired
+	OPDShalyatantraRepo opdShalyaRepo;
+	@Autowired
+	OPDStrirogaRepo opdStrirogRepo;
+	@Autowired
+	OPDBalrogaRepo opdBalrogRepo;
+	@Autowired
+	OPDAtyayikaRepo opdAtyayikaRepo;
+	@Autowired
+	OPDSwastharakshanamRepo opdSwasthaRepo;
 	
 	public List<Patient> fetchCOPD(LocalDate d)
 	{
@@ -90,14 +118,12 @@ public class COPDLogic {
 	
 	public String addSinglePatientRecord(Patient p) {
 		
-		Patient lastCopdPatient = opdi.getLastRecord();
-		
 		p.setDischarge_date(p.getDate());
-		p.setRecord_no(lastCopdPatient.getRecord_no());
-		p.setSr_no(lastCopdPatient.getSr_no());
+		p.setRecord_no(opdi.getLastRecord().getRecord_no()+1);
+		p.setSr_no(opdi.getLastRecord().getSr_no()+1);
 		
 		if(p.getOld_no()==0) {
-			p.setNew_no(lastCopdPatient.getNew_no());
+			p.setNew_no(opdi.getLastRecord().getNew_no());
 		}
 		
 		String isIpdResponse = constant.checkPatientForOPDAndIPD(p);
@@ -108,7 +134,34 @@ public class COPDLogic {
 			System.out.println("No IPD disease found");
 			double copdYrNo=recordLogic.increaseCopdYrNoCount();
 			p.setYearly_no(copdYrNo);
-			String response = recordLogic.addRecordToDOPD(p);
+			centralOpdRepo.save(p);								// adding patient to central OPD
+			
+			if(p.getDepartment().equalsIgnoreCase(constant.kayachikitsa)) {
+				p.setYearly_no(opdKayaRepo.getLastRecord().getYearly_no());
+				p.setRecord_no(opdKayaRepo.getLastRecord().getRecord_no());
+			}else if(p.getDepartment().equalsIgnoreCase(constant.panchakarma)) {
+				p.setYearly_no(opdPanchRepo.getLastRecord().getYearly_no());
+				p.setRecord_no(opdPanchRepo.getLastRecord().getRecord_no());
+			}else if(p.getDepartment().equalsIgnoreCase(constant.shalakya)) {
+				p.setYearly_no(opdShalakyaRepo.getLastRecord().getYearly_no());
+				p.setRecord_no(opdShalakyaRepo.getLastRecord().getRecord_no());
+			}else if(p.getDepartment().equalsIgnoreCase(constant.shalya)) {
+				p.setYearly_no(opdShalyaRepo.getLastRecord().getYearly_no());
+				p.setRecord_no(opdShalyaRepo.getLastRecord().getRecord_no());
+			}else if(p.getDepartment().equalsIgnoreCase(constant.strirog)) {
+				p.setYearly_no(opdStrirogRepo.getLastRecord().getYearly_no());
+				p.setRecord_no(opdStrirogRepo.getLastRecord().getRecord_no());
+			}else if(p.getDepartment().equalsIgnoreCase(constant.balrog)) {
+				p.setYearly_no(opdBalrogRepo.getLastRecord().getYearly_no());
+				p.setRecord_no(opdBalrogRepo.getLastRecord().getRecord_no());
+			}else if(p.getDepartment().equalsIgnoreCase(constant.atyayika)) {
+				p.setYearly_no(opdAtyayikaRepo.getLastRecord().getYearly_no());
+				p.setRecord_no(opdAtyayikaRepo.getLastRecord().getRecord_no());
+			}else if(p.getDepartment().equalsIgnoreCase(constant.swasthavrutta)) {
+				p.setYearly_no(opdSwasthaRepo.getLastRecord().getYearly_no());
+				p.setRecord_no(opdSwasthaRepo.getLastRecord().getRecord_no());
+			}
+			String response = recordLogic.addRecordToDOPD(p);	// adding patient to DOPD
 			System.out.println("==="+response);
 			return response;
 		}

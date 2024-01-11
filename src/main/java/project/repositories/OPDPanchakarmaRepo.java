@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import project.Entity.OPDKayachikitsa;
 import project.Entity.OPDPanchakarma;
+import project.Entity.Patient;
 
 @Repository
 public interface OPDPanchakarmaRepo extends JpaRepository<project.Entity.OPDPanchakarma, Double> {
@@ -16,4 +17,6 @@ public interface OPDPanchakarmaRepo extends JpaRepository<project.Entity.OPDPanc
 	@Query("select p from OPDPanchakarma p where p.dopd_panch_patient.date=:d")
 	public List<OPDPanchakarma> get_panch_DOPD_Patients(LocalDate d);
 	
+	@Query("select p from OPDPanchakarma p where dopd_panch_yearly_no = (select max(dopd_panch_yearly_no) from OPDPanchakarma)")
+	public Patient getLastRecord();
 }
