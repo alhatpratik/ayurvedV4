@@ -90,6 +90,16 @@ public class COPDLogic {
 	
 	public String addSinglePatientRecord(Patient p) {
 		
+		Patient lastCopdPatient = opdi.getLastRecord();
+		
+		p.setDischarge_date(p.getDate());
+		p.setRecord_no(lastCopdPatient.getRecord_no());
+		p.setSr_no(lastCopdPatient.getSr_no());
+		
+		if(p.getOld_no()==0) {
+			p.setNew_no(lastCopdPatient.getNew_no());
+		}
+		
 		String isIpdResponse = constant.checkPatientForOPDAndIPD(p);
 		if(isIpdResponse.contains("Yes")) {
 			System.out.println("IPD disease found");
