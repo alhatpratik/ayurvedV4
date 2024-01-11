@@ -21,6 +21,13 @@ public class COPDLogic {
 	Central_OPDRepo opdi;
 
 	@Autowired
+	Constant constant;
+	
+	
+	@Autowired
+	RecordLogic recordLogic;
+	
+	@Autowired
 	CentralAdmitLogic central_admit_logic;
 	
 	public List<Patient> fetchCOPD(LocalDate d)
@@ -80,4 +87,21 @@ public class COPDLogic {
 		
 	}
 	
+	
+	public String addSinglePatientRecord(Patient p) {
+		
+		String isIpdResponse = constant.checkPatientForOPDAndIPD(p);
+		if(isIpdResponse.contains("Yes")) {
+			System.out.println("IPD disease found");
+			return "IPD Disease found ";
+		}else{
+			System.out.println("No IPD disease found");
+			double copdYrNo=recordLogic.increaseCopdYrNoCount();
+			p.setYearly_no(copdYrNo);
+			String response = recordLogic.addRecordToDOPD(p);
+			System.out.println("==="+response);
+			return response;
+		}
+
+	}
 }

@@ -2,6 +2,8 @@ package project.EntityDAO;
 
 import org.springframework.stereotype.Component;
 
+import project.Entity.Patient;
+
 @Component
 public class Constant {
 
@@ -296,4 +298,127 @@ public class Constant {
 	String record_no_not_found_or_invalid = "Record Number not found Or Invalid";
 	String stri_vyandhyatva= "stri vyandhyatva";
 	
+	
+public String checkPatientForOPDAndIPD(Patient p){
+		
+		if(p.getDepartment().equalsIgnoreCase(this.kayachikitsa)) {
+			
+			if(	p.getDiagnosis().equalsIgnoreCase(this.aamlapitta) ||
+					p.getDiagnosis().equalsIgnoreCase(this.grahani)||
+					p.getDiagnosis().equalsIgnoreCase(this.shwas) ||
+					p.getDiagnosis().equalsIgnoreCase(this.nidranash) ||
+					p.getDiagnosis().equalsIgnoreCase(this.sthoulya) ||
+					p.getDiagnosis().equalsIgnoreCase(this.pandu) ||
+					p.getDiagnosis().equalsIgnoreCase(this.atisar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.vatajkas) ||
+					p.getDiagnosis().equalsIgnoreCase(this.parshnirshul)) {
+				
+					return "Yes IPD Disease found for "+this.kayachikitsa+" department";
+			
+			}else if(p.getAge()>40) {
+				
+				if(p.getDiagnosis().equalsIgnoreCase(this.aamvat) || 
+						p.getDiagnosis().equalsIgnoreCase(this.manyagatvat) ||
+						p.getDiagnosis().equalsIgnoreCase(this.sandhigatvat) ||
+						p.getDiagnosis().equalsIgnoreCase(this.gradhrasi) ||
+						p.getDiagnosis().equalsIgnoreCase(this.katigatvat))
+				{
+
+					return "Yes IPD Disease found for "+this.kayachikitsa+" department";
+
+				}
+				return "No IPD Disease found for "+this.kayachikitsa+" department";
+			}
+			else {
+				return "No IPD Disease found for "+this.kayachikitsa+" department";
+			}
+			
+		}else if(p.getDepartment().equalsIgnoreCase(this.panchakarma)) {
+			
+			if(	p.getDiagnosis().equalsIgnoreCase(this.nidranash) ||
+					p.getDiagnosis().equalsIgnoreCase(this.sthoulya)||
+					p.getDiagnosis().equalsIgnoreCase(this.parshnirshul)||
+					p.getDiagnosis().equalsIgnoreCase(this.aamvat) || 
+					p.getDiagnosis().equalsIgnoreCase(this.manyagatvat) ||
+					p.getDiagnosis().equalsIgnoreCase(this.sandhigatvat) ||
+					p.getDiagnosis().equalsIgnoreCase(this.gradhrasi) ||
+					p.getDiagnosis().equalsIgnoreCase(this.katigatvat) ||
+					p.getDiagnosis().equalsIgnoreCase(this.malavshtambha)
+					) {
+				return "Yes IPD Disease found for "+this.panchakarma+" department";
+			}else {
+				return "No IPD Disease found for "+this.panchakarma+" department";
+			}
+			
+		}else if(p.getDepartment().equalsIgnoreCase(this.strirog)) {
+			
+			if(p.getDiagnosis().equalsIgnoreCase(this.stri_vyandhyatva) ||
+					p.getDiagnosis().equalsIgnoreCase(this.puyayukt_yonistrav) ||
+					p.getDiagnosis().equalsIgnoreCase(this.shwetpradar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.yonikandu) ||
+					p.getDiagnosis().equalsIgnoreCase(this.yoni_daurgandhya) ||
+					p.getDiagnosis().equalsIgnoreCase(this.yonidah) ||
+					p.getDiagnosis().equalsIgnoreCase(this.granthibhut_rajpravartan) ||
+					p.getDiagnosis().equalsIgnoreCase(this.raktpradar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.kashtartav) ||
+					p.getDiagnosis().equalsIgnoreCase(this.aniyamit_rajpravartan) ||
+					p.getDiagnosis().equalsIgnoreCase(this.anartav) ||
+					p.getDiagnosis().equalsIgnoreCase(this.PCOD) ||
+					p.getDiagnosis().equalsIgnoreCase(this.garbhini_atisar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.garbhini_chhardi))
+			{
+				return "Yes IPD Disease found for "+this.strirog+" department";
+			}else {
+				return "NO IPD Disease found for "+this.strirog+" department";
+			}
+			
+		}else if(p.getDepartment().equalsIgnoreCase(this.shalya)) {
+			if(p.getDiagnosis().equalsIgnoreCase(this.arsh) || 
+					p.getDiagnosis().equalsIgnoreCase(this.parikartika) ||
+					p.getDiagnosis().equalsIgnoreCase(this.bhagandar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.gudbhransh) ||
+					p.getDiagnosis().equalsIgnoreCase(this.agantujravan) ||
+					p.getDiagnosis().equalsIgnoreCase(this.mutrashmari))
+			{
+				return "Yes IPD Disease found for "+this.shalya+" department";
+			}else {
+				return "NO IPD Disease found for "+this.shalya+" department";
+			}
+			
+		}else if(p.getDepartment().equalsIgnoreCase(this.balrog)) {
+			if(p.getDiagnosis().equalsIgnoreCase(this.atisar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.vataj_atisar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.pittaj_atisar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.krumi) ||
+					p.getDiagnosis().equalsIgnoreCase(this.visham_jwar) ||
+					p.getDiagnosis().equalsIgnoreCase(this.bahupitta_kamla)||
+					p.getDiagnosis().equalsIgnoreCase(this.vishuchika) ||
+					p.getDiagnosis().equalsIgnoreCase(this.pandu) ||
+					p.getDiagnosis().equalsIgnoreCase(this.sthoulya)
+					)
+			{
+				return "Yes IPD Disease found for Balrog IPD";
+			}else {
+				return "No IPD Disease found for Balrog IPD";
+			}
+			
+		}else if(p.getDepartment().equalsIgnoreCase(this.shalakya)) {
+			
+			if(p.getDiagnosis().equalsIgnoreCase(this.terizium)||
+					p.getDiagnosis().equalsIgnoreCase(this.netradah) ||
+					p.getDiagnosis().equalsIgnoreCase(this.pterigium) ||
+					p.getDiagnosis().equalsIgnoreCase(this.dacryocystits) ||
+					p.getDiagnosis().equalsIgnoreCase(this.lagan) ||
+					p.getDiagnosis().equalsIgnoreCase(this.netradah))
+			{
+				return "Yes IPD Disease found for "+this.shalakya+" department";
+			}else {
+				return "No IPD Disease found for "+this.shalakya+" department";
+			}
+			
+		}else{
+			return "No Department found";
+		}
+	}
+
 }

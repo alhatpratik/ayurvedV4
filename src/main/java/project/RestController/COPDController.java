@@ -67,4 +67,16 @@ public class COPDController {
 		String pt = copd_logic.updateRecord(p);
 		return pt;
 	}
+	
+	
+	@PostMapping("/copd/add/record")
+	@CrossOrigin("*")
+	public String addSinglePatientsRecord(@RequestBody Patient p)
+	{
+		System.out.println(p.getAddress()+" :: "+p.getAge()+" "+p.getDepartment()+" :: "+p.getDiagnosis()+" :: "+p.getName()+""
+				+ " :: "+p.getNew_no()+" :: "+p.getOld_no()+" :: "+p.getSex()+" :: "+p.getWeight()+" :: "+p.getDate()+" :: ");
+		System.out.println("inside this addSinglePatientRecord");
+		return copd_logic.addSinglePatientRecord(p);
+	}
+	
 }

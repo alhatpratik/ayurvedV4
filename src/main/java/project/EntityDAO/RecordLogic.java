@@ -4959,6 +4959,8 @@ public class RecordLogic {
 		
 	}
 	
-	
+	public double increaseCopdYrNoCount() {
+		return central_opd_yr_no = central_opd_yr_no+1;
+	}
 }
 
